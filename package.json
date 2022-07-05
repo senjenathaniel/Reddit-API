@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^2.6.7"
+    "node-fetch": "^2.6.7",
+    "snoowrap": "^1.23.0",
+    "twilio": "^3.78.0"
   }
 }

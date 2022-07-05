@@ -17,31 +17,35 @@ let getMemes = (url) => {
     });
 }
 
-let fad = (url) => {
+let getFad = (url) => {
   fetch(url)
     .then(res => res.json())
     .then(resultData => {
       let result = resultData.data.children;
       for (x = 0; x < result.length; x++) {
+        var titles = [];
         let title = result[x].data.title;
         let isAd = result[x].data.is_created_from_ads_ui;
         if (title.toLowerCase().includes("f4m") && isAd === false) {
           const age = parseInt(title.substring(0, 2));
-          if (age <= 27) {
-            let titles = {
-              "title": result[x].data.title,
-              "caption": result[x].data.selftext,
-              "posted_by": 'https://www.reddit.com/user/' + result[x].data.author,
-              "post_link": 'https://www.reddit.com' + result[x].data.permalink,
-            };
+          if (age) {
 
-            console.log(titles)
+            post = {
+              title: result[x].data.title,
+              caption: result[x].data.selftext,
+              posted_by: 'https://www.reddit.com/user/' + result[x].data.author,
+              post_link: 'https://www.reddit.com' + result[x].data.permalink,
+            };
           }
+          return titles.push(post);
         }
       }
     });
 }
 
-// getMemes('https://www.reddit.com/r/memes.json');
-let posts = fad('https://www.reddit.com/r/foreveralonedating.json');
-console.log(posts);
+getFad('http://www.reddit.com/r/foreveralonedating.json')
+
+module.exports = {
+  getMemes,
+  getFad
+}
